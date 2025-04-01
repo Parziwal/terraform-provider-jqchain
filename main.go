@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
-	"terraform-provider-jqchain/internal/provider"
+	"github.com/parziwal/terraform-provider-jqchain/internal/provider"
 )
 
 var (
