@@ -42,14 +42,14 @@ func (p *jqchainProvider) Schema(_ context.Context, _ provider.SchemaRequest, re
 	resp.Schema = schema.Schema{}
 }
 
-// Configure prepares a HashiCups API client for data sources and resources.
+// Configure creates initial setup for data sources and resources.
 func (p *jqchainProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
 }
 
 // DataSources defines the data sources implemented in the provider.
 func (p *jqchainProvider) DataSources(_ context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
-		NewJqchainDataSource,
+		NewReduceDataSource,
 	}
 }
 
