@@ -22,10 +22,10 @@ func NewReduceDataSource() datasource.DataSource {
 type reduceDataSource struct{}
 
 type reduceInputModel struct {
-	Initial types.String   `tfsdk:"initial"`
-	ContextName types.String `tfsdk:"context_name"`
-	Reducers []types.String `tfsdk:"reducers"`
-	Result  types.String   `tfsdk:"result"`
+	Initial     types.String   `tfsdk:"initial"`
+	ContextName types.String   `tfsdk:"context_name"`
+	Reducers    []types.String `tfsdk:"reducers"`
+	Result      types.String   `tfsdk:"result"`
 }
 
 func (d *reduceDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
@@ -38,11 +38,11 @@ func (d *reduceDataSource) Schema(_ context.Context, _ datasource.SchemaRequest,
 		Attributes: map[string]schema.Attribute{
 			"initial": schema.StringAttribute{
 				Description: "A JSON-formatted string representing the initial input value.",
-				Required: true,
+				Required:    true,
 			},
 			"context_name": schema.StringAttribute{
 				Description: "The name of the variable to inject into each JQ expression. Defaults to `context` if not specified.",
-				Optional: true,
+				Optional:    true,
 			},
 			"reducers": schema.ListAttribute{
 				Description: "A list of JQ expressions to evaluate in order. Each expression receives the previous result via the context variable.",
@@ -51,13 +51,13 @@ func (d *reduceDataSource) Schema(_ context.Context, _ datasource.SchemaRequest,
 			},
 			"result": schema.StringAttribute{
 				Description: "The final result after all reducers have been applied. Returned as a JSON string.",
-				Computed: true,
+				Computed:    true,
 			},
 		},
 	}
 }
 
-func (d *reduceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {	
+func (d *reduceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
 	var inputData reduceInputModel
 
 	// Read config
