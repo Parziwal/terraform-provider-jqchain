@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/function"
 )
 
 // Ensure the implementation satisfies the expected interfaces.
@@ -46,6 +47,11 @@ func (p *jqchainProvider) Schema(_ context.Context, _ provider.SchemaRequest, re
 func (p *jqchainProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
 }
 
+// Resources defines the resources implemented in the provider.
+func (p *jqchainProvider) Resources(_ context.Context) []func() resource.Resource {
+	return nil
+}
+
 // DataSources defines the data sources implemented in the provider.
 func (p *jqchainProvider) DataSources(_ context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
@@ -53,7 +59,9 @@ func (p *jqchainProvider) DataSources(_ context.Context) []func() datasource.Dat
 	}
 }
 
-// Resources defines the resources implemented in the provider.
-func (p *jqchainProvider) Resources(_ context.Context) []func() resource.Resource {
-	return nil
+// Functions defines the functions implemented in the provider.
+func (p *jqchainProvider) Functions(_ context.Context) []func() function.Function {
+	return []func() function.Function{
+		NewReduceFunction,
+	}
 }
