@@ -19,11 +19,11 @@ func NewReduceDataSource() datasource.DataSource {
 
 type reduceDataSource struct{}
 
-type reduceDataSourceModel struct{
+type reduceDataSourceModel struct {
 	Initial     types.String   `tfsdk:"initial"`
 	Reducers    []types.String `tfsdk:"reducers"`
-		ContextName types.String   `tfsdk:"context_name"`
-	Result      types.String `tfsdk:"result"`
+	ContextName types.String   `tfsdk:"context_name"`
+	Result      types.String   `tfsdk:"result"`
 }
 
 func (d *reduceDataSource) Metadata(_ context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
@@ -67,8 +67,8 @@ func (d *reduceDataSource) Read(ctx context.Context, req datasource.ReadRequest,
 
 	// Evaluate reducers
 	result, err := core.EvaluateJQReducers(core.ReduceModel{
-		Initial: inputData.Initial,
-		Reducers: inputData.Reducers,
+		Initial:     inputData.Initial,
+		Reducers:    inputData.Reducers,
 		ContextName: inputData.ContextName,
 	})
 	if err != nil {

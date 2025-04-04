@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/itchyny/gojq"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/itchyny/gojq"
 )
 
 type ReduceModel struct {
@@ -20,7 +20,7 @@ func EvaluateJQReducers(reduceModel ReduceModel) (types.String, error) {
 	if err := json.Unmarshal([]byte(reduceModel.Initial.ValueString()), &currentContext); err != nil {
 		return types.StringNull(), fmt.Errorf("Failed to parse initial JSON: %w", err)
 	}
-	
+
 	// Set context name
 	contextName := "context"
 	if !reduceModel.ContextName.IsNull() && reduceModel.ContextName.ValueString() != "" {
