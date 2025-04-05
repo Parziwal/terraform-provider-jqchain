@@ -18,7 +18,7 @@ func EvaluateJQReducers(reduceModel ReduceModel) (types.String, error) {
 	// Parse the initial JSON into a Go object
 	var currentContext interface{}
 	if err := json.Unmarshal([]byte(reduceModel.Initial.ValueString()), &currentContext); err != nil {
-		return types.StringNull(), fmt.Errorf("Failed to parse initial JSON: %w", err)
+		return types.StringNull(), fmt.Errorf("failed to parse initial JSON: %w", err)
 	}
 
 	// Set context name
@@ -32,7 +32,7 @@ func EvaluateJQReducers(reduceModel ReduceModel) (types.String, error) {
 		expression := reducer.ValueString()
 		query, err := gojq.Parse(expression)
 		if err != nil {
-			return types.StringNull(), fmt.Errorf("Invalid JQ expression '%s': %w", expression, err)
+			return types.StringNull(), fmt.Errorf("invalid JQ expression '%s': %w", expression, err)
 		}
 
 		input := map[string]interface{}{
@@ -54,7 +54,7 @@ func EvaluateJQReducers(reduceModel ReduceModel) (types.String, error) {
 	// Marshal final result back to JSON string
 	final, err := json.Marshal(currentContext)
 	if err != nil {
-		return types.StringNull(), fmt.Errorf("Failed to serialize result: %w", err)
+		return types.StringNull(), fmt.Errorf("failed to serialize result: %w", err)
 	}
 
 	return types.StringValue(string(final)), nil
